@@ -36,7 +36,7 @@ namespace attempt3
                     break;
                 case "list":
                 case "l":
-                    ControlClass.UserOutputLogger("clear; start 1; list hidden; version info; list; ");
+                    ControlClass.List();
                     MainClass.MainPrompt();
                     break;
                 case "start 1":
@@ -44,17 +44,6 @@ namespace attempt3
                     ControlClass.UserOutputLogger("Start configuration 1 selected, proceed?");
                     ControlClass.InputPrompt("y / n");
                     ControlClass.Start1Handler();
-                    break;
-                case "list hidden":
-                case "lh":
-                    ControlClass.UserOutputLogger("list settings; ");
-                    MainClass.MainPrompt();
-                    break;
-                case "list settings":
-                case "ls":
-                    ControlClass.UserOutputLogger("This option requires a password");
-                    ControlClass.InputPrompt("Please enter password");
-                    ControlClass.PasswordReader();
                     break;
                 case "version info":
                 case "vi":
@@ -73,10 +62,8 @@ namespace attempt3
 
     class ControlClass
     {
-        //LOCATION STRINGS - THESE STRINGS LOCATE IMPORTANT TXT FILES. REPLACE THESE WITH YOUR OWN LINKS.
-        
-        public static string VIlocation = "REPLACE-WITH-PATH-TO-VersionInfo.txt";
-        public static string Llocation = "REPLACE-WITH-PATH-TO-List.txt";
+        public static string VIlocation = "/Users/matthewthomas/Projects/attempt3/attempt3/VersionInfo.txt";
+        public static string Llocation = "/Users/matthewthomas/Projects/attempt3/attempt3/List.txt";
 
         public static void ControlMain()
         {
@@ -139,6 +126,8 @@ namespace attempt3
             }
             MainClass.MainPrompt();
         }
+
+        //LIST - LIST NOW READS FROM AN EASILY EXPANDABLE TXT FILE.
 
         public static void List()
         {
