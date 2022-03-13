@@ -62,8 +62,8 @@ namespace attempt3
 
     class ControlClass
     {
-        public static string VIlocation = "/Users/matthewthomas/Projects/attempt3/attempt3/VersionInfo.txt";
-        public static string Llocation = "/Users/matthewthomas/Projects/attempt3/attempt3/List.txt";
+        public static string VIlocation = "paste VersionInfo address here";
+        public static string Llocation = "paste List address here";
 
         public static void ControlMain()
         {
