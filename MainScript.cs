@@ -20,6 +20,10 @@ namespace attempt3
         public static void MainPrompt()
         {
             ControlClass.DebugLogger("DEBUG: MainClass.MainPrompt Called Successfully");
+            if (Global.passwordFlag == true)
+            {
+                ControlClass.DebugLogger("DEBUG: PASSWORDFLAG = TRUE");
+            }
 
             ControlClass.InputPrompt("Please enter a string.");
 
@@ -43,11 +47,15 @@ namespace attempt3
                 case "s1":
                     ControlClass.UserOutputLogger("Start configuration 1 selected, proceed?");
                     ControlClass.InputPrompt("y / n");
-                    ControlClass.Start1Handler();
+                    StateOne.Start1Handler();
                     break;
                 case "version info":
                 case "vi":
                     ControlClass.VersionInfo();
+                    break;
+                case "password reader":
+                case "pr":
+                    ControlClass.PasswordReader();
                     break;
                 default:
                     ControlClass.UserOutputLogger("Invalid input, please try again. Input: " + sussy);
@@ -62,8 +70,9 @@ namespace attempt3
 
     class ControlClass
     {
-        public static string VIlocation = "paste VersionInfo address here";
-        public static string Llocation = "paste List address here";
+        public static string VIlocation = "Replace with path to VersionInfo";
+        public static string Llocation = "Replace with path to List";
+        public static string PLocation = "Replace with path to Password.TXT";
 
         public static void ControlMain()
         {
@@ -71,41 +80,21 @@ namespace attempt3
             MainClass.MainPrompt();
         }
 
-        //START HANDLERS - HANDLES THE START OF EACH STATE.
-
-        public static void Start1Handler()
-        {
-            string userResponse = Console.ReadLine();
-            string fixedUserResponse = userResponse.ToLower();
-            switch (fixedUserResponse)
-            {
-                case "y":
-                    Console.Clear();
-                    ControlClass.UserOutputLogger("Continuing...");
-                    break;
-                case "n":
-                    Console.Clear();
-                    MainClass.MainPrompt();
-                    break;
-                default:
-                    MainClass.MainPrompt();
-                    break;
-            }
-        }
-
-        //PASSWORD READER - READS PASSWORD REQUIRED FOR SUPER COMMANDS.
+        //PASSWORD READER - Reads password for supercommands.
 
         public static void PasswordReader()
         {
-            string passwordInput = Console.ReadLine();
-            string passwordFixed = passwordInput.ToLower();
-            string passwordRequired = "test";
+            StreamReader sr = new StreamReader(ControlClass.PLocation);
 
-            if (passwordFixed == passwordRequired)
+            string passwordInput = Console.ReadLine();
+
+            if (passwordInput == sr.ReadLine())
             {
                 Console.Clear();
                 ControlClass.UserOutputLogger("Password accepted");
-
+                sr.Close();
+                Global.passwordFlag = true;
+                MainClass.MainPrompt();
             }
             else
             {
@@ -114,7 +103,7 @@ namespace attempt3
             }
         }
 
-        //VERSION INFO - DISPLAYS THE CONTENTS OF VERSIONINFO.TXT, UPDATE THIS FILE AFTER EVERY MAJOR CHANGE.
+        //VERSION INFO - Displays info of VersionInfo, do be changed after every update.
 
         public static void VersionInfo()
         {
@@ -127,7 +116,7 @@ namespace attempt3
             MainClass.MainPrompt();
         }
 
-        //LIST - LIST NOW READS FROM AN EASILY EXPANDABLE TXT FILE.
+        //LIST - List now reads from a txt file.
 
         public static void List()
         {
@@ -140,7 +129,7 @@ namespace attempt3
             MainClass.MainPrompt();
         }
 
-        //LOGGING METHODS - EACH METHOD CONTAINS A BRIEF DESCRIPTION OF THEIR USECASES.
+        //LOGGING METHODS - Each method briefly describes their usecases.
 
         public static void DebugLogger(string DebugMessage) //Use for debugging only.
         {
@@ -162,5 +151,44 @@ namespace attempt3
             Console.WriteLine(InputMessage);
             Console.ForegroundColor = ConsoleColor.White;
         }
+    }
+
+    //STATEONE - All code related to StateOne resides here.
+
+    class StateOne 
+    {
+        public static void StateController() 
+        {
+            ControlClass.DebugLogger("DEBUG: StateOne.StateController() Called Successfully");
+        }
+
+        public static void Start1Handler()
+        {
+            string userResponse = Console.ReadLine();
+            string fixedUserResponse = userResponse.ToLower();
+            switch (fixedUserResponse)
+            {
+                case "y":
+                    Console.Clear();
+                    ControlClass.UserOutputLogger("Continuing...");
+                    StateOne.StateController();
+                    break;
+                case "n":
+                    Console.Clear();
+                    MainClass.MainPrompt();
+                    break;
+                default:
+                    StateOne.StateController();
+                    break;
+            }
+        }
+    }
+
+    //GLOBAL - USED FOR GLOBAL FLAGS SUCH AS PASSWORDFLAG.
+
+    class Global 
+    {
+        public static bool passwordFlag = false;
+
     }
 }
