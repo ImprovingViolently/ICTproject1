@@ -1,10 +1,9 @@
 Version Information
-Version 0.0.3 - PreAlpha
-Dated 11.03.2022
+Version 0.0.4 - PreAlpha
+Dated 13.03.2022
 
 Change Log:
--Added List.txt
--List command now reads from List.txt
--Expanded comments and improved readability
--Made remapping .txt file locations easier
--Removed sublists for settings commands
+-Updated ControlClass.PasswordReader() to read from a txt file
+-Added Global class
+-Added Global.passwordFlag
+-Progress on StateOne launcher
