@@ -27,3 +27,17 @@ Change Log:
 -Made remapping .txt file locations easier
 
 -Removed sublists for settings commands
+
+-------------------
+### Version Information
+Version 0.0.4 - PreAlpha / Dated 13.03.2022
+
+### Change Log:
+
+-Updated ControlClass.PasswordReader() to read from a txt file
+
+-Added Global class
+
+-Added Global.passwordFlag
+
+-Progress on StateOne launcher
