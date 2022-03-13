@@ -2,3 +2,4 @@ clear - Clears logs;
 start 1 - Starts state 1 - no functionality;
 version info - Displays a version info screen;
 list - Lists commands;
+password reader - Activates password reader, intended for debugging;
