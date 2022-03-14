@@ -11,7 +11,7 @@ namespace attempt3
             ControlClass.DebugLogger("PROGRAM INITIALING");
             ControlClass.DebugLogger("SUCCESS");
 
-            ControlClass.DebugLogger("VERSION 0.0.2 - PRE-ALPHA");
+            ControlClass.DebugLogger("VERSION 0.0.4 - PRE-ALPHA");
             ControlClass.ControlMain();
         }
 
