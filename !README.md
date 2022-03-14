@@ -10,6 +10,8 @@ For ease of expansion/repurposing, I am going to release a full list of methods 
 
 # Setup
 
+If you are unsure of what to do, feel free to use the ''
+
 ### IMPORTANT INFORMATION. DO NOT IGNORE.
 
 While setting up this mess of a program, you will need to configure some of the files to read an accurate address. Failing to configure this WILL BREAK THE WHOLE PROGRAM. DO NOT IGNORE.
