@@ -1,0 +1,10 @@
+Hello there, If you are stuggling, this is the right place!
+
+Start by inputting a Username using 'username' command.
+After that, you should try to launch a gamestate using 'Start 1'.
+Follow instructions as directed.
+
+If you are feeling comfortable, try using list to see a full functionality list.
+Be warned, some commands require a superpassword.
+
+To input a superpassword, use 'pr'.
