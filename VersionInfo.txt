@@ -1,9 +1,12 @@
 Version Information
-Version 0.0.4 - PreAlpha
-Dated 13.03.2022
+Version 0.0.5 - PreAlpha
+Dated 17.03.2022
 
 Change Log:
--Updated ControlClass.PasswordReader() to read from a txt file
--Added Global class
--Added Global.passwordFlag
--Progress on StateOne launcher
+-Added debug logging toggle
+--Added password requirment
+-Added functionality for password reader
+-Added username functionality
+--Added username reader
+--Added username return command
+-Added help command
