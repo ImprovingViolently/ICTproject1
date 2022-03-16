@@ -10,8 +10,8 @@ namespace attempt3
         {
             ControlClass.DebugLogger("PROGRAM INITIALING");
             ControlClass.DebugLogger("SUCCESS");
+            ControlClass.DebugLogger("VERSION 0.0.5 - PRE-ALPHA");
 
-            ControlClass.DebugLogger("VERSION 0.0.4 - PRE-ALPHA");
             ControlClass.ControlMain();
         }
 
@@ -20,17 +20,17 @@ namespace attempt3
         public static void MainPrompt()
         {
             ControlClass.DebugLogger("DEBUG: MainClass.MainPrompt Called Successfully");
-            if (Global.passwordFlag == true)
+            if (Global.passwordFlag != false)
             {
                 ControlClass.DebugLogger("DEBUG: PASSWORDFLAG = TRUE");
             }
 
             ControlClass.InputPrompt("Please enter a string.");
 
-            string sussy = Console.ReadLine();
-            string sussyFixed = sussy.ToLower();
+            string input = Console.ReadLine();
+            string inputLower = input.ToLower();
 
-            switch (sussyFixed) //MAIN SWITCHBOARD - HANDLES USER INPUT IN THE STARTING PROMPT. EACH COMMAND REQUIRES A SHORTHAND VERSION TO ALLOW CONSISTENCY.
+            switch (inputLower) //MAIN SWITCHBOARD - Handles primary user input. Each command should have a shorthand ie. c = clear.
             {
                 case "clear":
                 case "c":
@@ -57,8 +57,43 @@ namespace attempt3
                 case "pr":
                     ControlClass.PasswordReader();
                     break;
+                case "username":
+                case "un":
+                    ControlClass.UsernameReader();
+                    break;
+                case "return username":
+                case "ru":
+                    ControlClass.UserOutputLogger(Global.username);
+                    MainClass.MainPrompt();
+                    break;
+                case "help":
+                case "h":
+                    ControlClass.Help();
+                    break;
+                case "debug logging":
+                case "dl":
+                    if (Global.passwordFlag == true)
+                    {
+                        if (Global.debugLogging == true)
+                        {
+                            ControlClass.UserOutputLogger("Toggled debug logging.");
+                            Global.debugLogging = false;
+                            MainClass.MainPrompt();
+                        }
+                        else
+                        {
+                            Global.debugLogging = true;
+                            ControlClass.UserOutputLogger("Toggled debug logging.");
+                            MainClass.MainPrompt();
+                        }
+                    }
+                    else
+                    {
+                        ControlClass.DebugLogger("INSUFFICINT AUTHORITY");
+                    }
+                    break;
                 default:
-                    ControlClass.UserOutputLogger("Invalid input, please try again. Input: " + sussy);
+                    ControlClass.UserOutputLogger("Invalid input, please try again. Input: " + inputLower);
                     MainClass.MainPrompt();
                     break;
             }
@@ -70,9 +105,12 @@ namespace attempt3
 
     class ControlClass
     {
-        public static string VIlocation = "Replace with path to VersionInfo";
-        public static string Llocation = "Replace with path to List";
-        public static string PLocation = "Replace with path to Password.TXT";
+        //FILE LOCATIONS - Replace these with the location of different files within your computer.
+
+        public static string VIlocation = "Replace With Custom Path";    //Version Info
+        public static string Llocation = "Replace With Custom Path";    //Command List
+        public static string Plocation = "Replace With Custom Path";    //Password
+        public static string Hlocation = "Replace With Custom Path"; //HelpList
 
         public static void ControlMain()
         {
@@ -84,7 +122,10 @@ namespace attempt3
 
         public static void PasswordReader()
         {
-            StreamReader sr = new StreamReader(ControlClass.PLocation);
+            ControlClass.UserOutputLogger("To access certain commands, a superpassword is required.");
+            ControlClass.InputPrompt("Please enter the superpassword");
+
+            StreamReader sr = new StreamReader(ControlClass.Plocation);
 
             string passwordInput = Console.ReadLine();
 
@@ -101,6 +142,15 @@ namespace attempt3
                 ControlClass.UserOutputLogger("INCORRECT PASSWORD");
                 MainClass.MainPrompt();
             }
+        }
+
+        //USERNAME READER - Prompts user to input a name.
+
+        public static void UsernameReader()
+        {
+            InputPrompt("Please enter a username");
+            Global.username = Console.ReadLine();
+            MainClass.MainPrompt();
         }
 
         //VERSION INFO - Displays info of VersionInfo, do be changed after every update.
@@ -129,13 +179,31 @@ namespace attempt3
             MainClass.MainPrompt();
         }
 
+        //HELP - Lists a series of commands that are useful.
+
+
+        public static void Help()
+        {
+            StreamReader sr = new StreamReader(Hlocation);
+
+            while (sr.EndOfStream != true)
+            {
+                UserOutputLogger(sr.ReadLine());
+            }
+
+            MainClass.MainPrompt();
+        }
+
         //LOGGING METHODS - Each method briefly describes their usecases.
 
         public static void DebugLogger(string DebugMessage) //Use for debugging only.
         {
-            Console.ForegroundColor = ConsoleColor.Red;
-            Console.WriteLine(DebugMessage);
-            Console.ForegroundColor = ConsoleColor.White;
+            if (Global.debugLogging == true)
+            {
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine(DebugMessage);
+                Console.ForegroundColor = ConsoleColor.White;
+            }
         }
 
         public static void UserOutputLogger(string OutputMessage) //Use to respod to user input.
@@ -189,6 +257,7 @@ namespace attempt3
     class Global 
     {
         public static bool passwordFlag = false;
-
+        public static bool debugLogging = false;
+        public static string username = "default";
     }
 }
