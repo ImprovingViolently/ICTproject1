@@ -41,3 +41,22 @@ Version 0.0.4 - PreAlpha / Dated 13.03.2022
 -Added Global.passwordFlag
 
 -Progress on StateOne launcher
+
+--------------------
+### Version 0.0.5 - PreAlpha / Dated 17.03.2022
+
+### Change Log:
+
+-Added debug logging toggle
+
+--Added password requirment
+
+-Added functionality for password reader
+
+-Added username functionality
+
+--Added username reader
+
+--Added username return command
+
+-Added help command
