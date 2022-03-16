@@ -2,4 +2,7 @@ clear - Clears logs;
 start 1 - Starts state 1 - no functionality;
 version info - Displays a version info screen;
 list - Lists commands;
-password reader - Activates password reader, intended for debugging;
+password reader - Activates password reader;
+debug logger - Toggles debug logging;
+username - Prompts user to input a name;
+help - Displays a help list;
